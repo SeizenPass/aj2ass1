@@ -30,17 +30,22 @@ public class CSVInputReader extends Thread {
             csvReader.readNext();
             String[] lineInArray;
             while ((lineInArray = csvReader.readNext()) != null) {
-                System.out.println("File " + path + " is reading");
-                Article article = new Article();
-                article.setId(lineInArray[0]);
-                article.setSourceId(lineInArray[1]);
-                article.setSourceName(lineInArray[2]);
-                article.setTitle(lineInArray[3]);
-                article.setContent(lineInArray[4]);
-                article.setPublishedAt(lineInArray[5]);
-                System.out.println(article);
-                synchronized (storage) {
-                    storage.getStorage().add(article);
+                System.out.println("\033[0;35m[INFO]\033[0m File\033[1;36m " + path + "\033[0m is reading");
+                try {
+                    Article article = new Article();
+                    article.setId(lineInArray[0]);
+                    article.setSourceId(lineInArray[1]);
+                    article.setSourceName(lineInArray[2]);
+                    article.setTitle(lineInArray[3]);
+                    article.setContent(lineInArray[4]);
+                    article.setPublishedAt(lineInArray[5]);
+                    System.out.println("\033[0;35m[INFO]\033[0m "+article);
+                    synchronized (storage) {
+                        storage.getStorage().add(article);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+
                 }
             }
             csvReader.close();

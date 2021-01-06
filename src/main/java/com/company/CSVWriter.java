@@ -72,6 +72,7 @@ public class CSVWriter extends Thread {
                     publisherMap.get(key).setAvgContentLength(avg);
                 }
                 File myObj = new File("report.csv");
+                System.out.print("\033[0;35m[INFO]\033[0m ");
                 if (myObj.createNewFile()) {
                     System.out.println("File created: " + myObj.getName());
                 } else {
@@ -82,6 +83,8 @@ public class CSVWriter extends Thread {
                         publisherMap.keySet()) {
                     myWriter.write(publisherMap.get(a) + "\n");
                 }
+                System.out.println("\033[0;33m[WARN] OPEN THE REPORT.CSV IN NOTEPAD OR OTHER TEXT EDITOR, BUT NOT EXCEL, BECAUSE I MADE IT NOT COMMA SEPARATED!");
+                System.out.println("REPORT.CSV WILL APPEAR IN THE SAME DIRECTORY AS OTHER 4 FILES.");
                 myWriter.close();
 
         } catch (Exception e) {
